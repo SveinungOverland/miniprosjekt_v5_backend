@@ -1,5 +1,5 @@
 import { Response } from 'express'
-import { Document } from 'mongoose'
+//import { Document } from 'mongoose'
 import { StatusCodes, ErrorResponse, DataResponse, simpleApiResponse } from './response.interfaces'
 
 
