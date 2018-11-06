@@ -16,7 +16,7 @@ const server = express()
 server.use(bodyParserJSON())
 
 
-const PORT = process.env.port || 3000
+const PORT = process.env.PORT || 3000
 const URI: string = process.env.MONGODB_URI || "Something went wrong"
 
 mongoose.connect(URI, { useNewUrlParser: true })
