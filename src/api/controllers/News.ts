@@ -18,10 +18,10 @@ import { signToken } from '../crypto'
 export default class News {
     // CRUD OPERATIONS FOR NEWS TO BE USED IN ROUTES
     static post(req: Request, res: Response) {
-        const { poster, header, content, peek, image, category } = req.body
+        const { header, content, peek, image, category } = req.body
         const { username } = req.body.verified
         NewsModel.create({
-            poster,
+            username,
             header,
             content,
             peek,

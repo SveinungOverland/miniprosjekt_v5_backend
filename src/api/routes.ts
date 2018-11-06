@@ -36,6 +36,6 @@ routes.route("/news/:username")
 
 
 routes.route("/comment/:newsid")
-    .post(requireLogin(matchParams(params => params.username)(Comment.postToArticle)))
+    .post(requireLogin(Comment.postToArticle))
 
 export default routes
