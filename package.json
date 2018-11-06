@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/jest": "*",
     "@types/body-parser": "^1.17.0",
     "@types/dotenv": "^4.0.3",
     "@types/express": "^4.16.0",
