@@ -8,6 +8,7 @@ import { StatusCodes } from '../response.interfaces';
 export default class Token {
     static get = (req: Request, res: Response) => respondWithOk(res, signToken(req.body.verified.username))()
     static post = (req: Request, res: Response) => {
+        console.log("Token post body: ", req.body)
         const { username, password } = req.body
         console.log("Looking for user", username, password)
         UserModel.findOne({ username: username })
