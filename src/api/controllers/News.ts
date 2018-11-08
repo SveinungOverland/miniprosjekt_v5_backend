@@ -2,11 +2,11 @@ import { Request, Response } from 'express'
 
 import { Document } from 'mongoose'
 
-import { NewsModel, CategoryModel } from '../models'
+import { NewsModel/*, CategoryModel*/ } from '../models'
 
 import { StatusCodes } from '../response.interfaces'
 
-import { respondWithError, respondWithData, respondWithOk } from '../response.funcs'
+import { respondWithError, respondWithData/*, respondWithOk*/ } from '../response.funcs'
 
 import { PublicNews } from '../models.public'
 
