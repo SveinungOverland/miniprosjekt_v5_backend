@@ -26,6 +26,17 @@ mongoose.connect(URI, { useNewUrlParser: true })
 
 server.use(morgan('dev'))
 
+
+server.use((request, response, next) => {
+    response.header("Access-Control-Allow-Origin", "*")
+    response.header("Access-Control-Allow-Headers", "*")
+    response.header("Access-Control-Allow-Methods", "*")
+    if (request.method === 'OPTIONS') {
+        response.send(200)
+    } else {
+        next()
+    }
+}) 
 server.use("/api", routes)
 
 server.listen(PORT, () => console.log(`Listening on port: ${ PORT }`))
