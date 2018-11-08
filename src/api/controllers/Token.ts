@@ -9,8 +9,10 @@ export default class Token {
     static get = (req: Request, res: Response) => respondWithOk(res, signToken(req.body.verified.username))()
     static post = (req: Request, res: Response) => {
         const { username, password } = req.body
+        console.log("Looking for user", username, password)
         UserModel.findOne({ username: username })
         .then(dbUser => { if(dbUser) {
+            console.log("Found user checking password", "dbUser.get('password') "+dbUser.get("password"))
             checkPassword(password, dbUser.get("password"))
             .then(match => {
                 if (match) respondWithOk(res, signToken(username))()
