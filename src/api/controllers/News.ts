@@ -32,6 +32,15 @@ export default class News {
         .catch(respondWithError(res)(StatusCodes.SERVER_ERROR, "Server failed at creating post, try again later."))
     }
 
+    static get(_: Request, res: Response) {
+        NewsModel.find()
+            .limit(20)
+            .then(doc => {
+                if(doc) respondWithData<Document[]>(res)(PublicNews.responseFromNewsDocArray)(doc)
+                else respondWithError(res)(StatusCodes.NOT_FOUND, "No posts")()
+            })
+    }
+
     static getFromUsername(req: Request, res: Response) {
         const { username } = req.body
         NewsModel.find({ poster: username })

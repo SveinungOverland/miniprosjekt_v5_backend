@@ -27,6 +27,7 @@ routes.route("/token")
 
 routes.route("/news")
     .post(requireLogin(matchParams(params => params.username)(News.post)))
+    .get(User.post)
 
 
 routes.route("/news/:username")
