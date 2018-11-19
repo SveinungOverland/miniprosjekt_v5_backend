@@ -33,6 +33,7 @@ test("[Create] UserModel", done => {
     })
 })
 
+/*
 test("[Create] CommentModel", done => {
     const { poster, post } = { poster: "test1337", post: "Dette er en test" }
     CommentModel.create({
@@ -43,7 +44,7 @@ test("[Create] CommentModel", done => {
         done()
     })
 })
-
+*/
 test("[Create] CategoryModel", done => {
     const { name } = { name: "test" }
     CategoryModel.create({
