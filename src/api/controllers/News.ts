@@ -35,7 +35,6 @@ export default class News {
 
     static get(_: Request, res: Response) {
         NewsModel.find()
-            .limit(20)
             .then(doc => {
                 if(doc) respondWithData<Document[]>(res)(PublicNews.responseFromNewsDocArray)(doc)
                 else respondWithError(res)(StatusCodes.NOT_FOUND, "No posts")()
