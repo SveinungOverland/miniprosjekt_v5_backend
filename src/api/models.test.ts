@@ -3,7 +3,7 @@ import 'jest'
 import { config as dotenvConfig } from 'dotenv'
 dotenvConfig()
 import * as mongoose from 'mongoose'
-import { UserModel, CommentModel, CategoryModel, NewsModel } from './models'
+import { UserModel, /*CommentModel,*/ CategoryModel, NewsModel } from './models'
 
 
 
