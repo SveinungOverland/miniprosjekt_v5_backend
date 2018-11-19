@@ -76,3 +76,10 @@ test("[Create] NewsModel", done => {
         done()
     })
 })
+
+test("[Delete] NewsModel", done => {
+    NewsModel.deleteMany({ header: "test" }).exec()
+    .then(_ => {
+        done()
+    })
+})
