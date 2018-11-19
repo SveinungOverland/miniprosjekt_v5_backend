@@ -5,7 +5,7 @@ import Token from './controllers/Token'
 import News from './controllers/News'
 import Comment from './controllers/Comment'
 
-import { requireLogin, matchParams } from './crypto'
+import { requireLogin, matchParams, matchBody } from './crypto'
 import { UserRoles } from './models';
 
 const routes = Router()
@@ -26,13 +26,16 @@ routes.route("/token")
 
 
 routes.route("/news")
-    .post(requireLogin(matchParams(params => params.username)(News.post)))
-    .get(User.post)
+    .post(requireLogin(matchBody(body => body.poster)(News.post)))
+    .get(News.get)
 
 
 routes.route("/news/:username")
     .get(News.getFromUsername)
 // TODO LEGG TIL MER ROUTES FOR NYHETER, MED TID OSV... MÅ OG HA EN MÅTE Å REGNE QUALITY PÅ
+
+routes.route("/news/:username/:timestamp")
+    .get(News.getFromUsernameTimestamp)
 
 
 

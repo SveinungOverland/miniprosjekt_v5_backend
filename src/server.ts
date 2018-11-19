@@ -7,12 +7,16 @@ import * as mongoose from 'mongoose'
 
 import * as morgan from 'morgan'
 
+import * as socket from 'socket.io'
+
 // Import routes
 import routes from './api/routes'
 
+import { NewsModel } from './api/models'
+
 
 // Init server and bodyparser
-const server = express()
+export const server = express()
 server.use(bodyParserJSON())
 
 
@@ -32,13 +36,24 @@ server.use((request, response, next) => {
     response.header("Access-Control-Allow-Headers", "*")
     response.header("Access-Control-Allow-Methods", "*")
     if (request.method === 'OPTIONS') {
-        response.send(200)
+        response.sendStatus(200)
     } else {
         next()
     }
 }) 
 server.use("/api", routes)
 
-server.listen(PORT, () => console.log(`Listening on port: ${ PORT }`))
+export const http = server.listen(PORT, () => console.log(`Listening on port: ${ PORT }`))
 
-export default server
+export const io = socket(http)
+
+io.on('connection', (_) => {
+    console.log("User connected to socket")
+    NewsModel.find({}).sort({ timestamp: 'desc'}).limit(5)
+        .then(res => {
+            res.reverse().forEach(item => {
+                io.emit("news", item)
+            })
+        })
+})
+

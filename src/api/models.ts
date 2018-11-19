@@ -18,7 +18,6 @@ const userSchema = new Schema({
 
 
 const commentSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     poster: String, // Poster username
     timestamp: { type: Date, default: Date.now },
     post: String
@@ -26,12 +25,10 @@ const commentSchema = new Schema({
 
 
 const categorySchema = new Schema({
-    _id: Schema.Types.ObjectId,
     name: String
 })
 
 const newsSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     poster: { type: String, index: true }, // Poster username
     header: String,
     content: String,

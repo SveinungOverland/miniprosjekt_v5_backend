@@ -55,7 +55,18 @@ export const matchParams = (against: (params: any) => string, also: UserRoles[] 
         (req: Request, res: Response) => {
             let verifiedUsername: string = req.body.verified.username || ""
             let role = ""
-            if (also) UserModel.findOne({ username: verifiedUsername }).exec((_, res) => role = res ? res.get("role") : "")
+            if (also.length > 0) UserModel.findOne({ username: verifiedUsername }).exec((_, res) => role = res ? res.get("role") : "")
             if (verifiedUsername === against(req.params) || role in also) return next(req, res)
+            else return respondWithError(res)(StatusCodes.CONFLICT, "There is a conflict between the request access and the action permission")()
+        }
+
+
+export const matchBody = (against: (data: any) => string, also: UserRoles[] = []) =>
+    (next: (request: Request, response: Response) => void) => 
+        (req: Request, res: Response) => {
+            let verifiedUsername: string = req.body.verified.username || ""
+            let role = ""
+            if (also.length > 0) UserModel.findOne({ username: verifiedUsername }).exec((_, res) => role = res ? res.get("role") : "")
+            if (verifiedUsername === against(req.body) || role in also) return next(req, res)
             else return respondWithError(res)(StatusCodes.CONFLICT, "There is a conflict between the request access and the action permission")()
         }
