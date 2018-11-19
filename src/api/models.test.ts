@@ -3,7 +3,7 @@ import 'jest'
 import { config as dotenvConfig } from 'dotenv'
 dotenvConfig()
 import * as mongoose from 'mongoose'
-import { UserModel, /*CommentModel,*/ CategoryModel, NewsModel } from './models'
+import { /*UserModel,*/ CommentModel, CategoryModel, NewsModel } from './models'
 
 
 
@@ -21,7 +21,7 @@ afterAll(() => {
 })
 
 
-
+/*
 test("[Create] UserModel", done => {
     const { username, password } = { username: "test1337", password: "test" }
     UserModel.create({
@@ -32,8 +32,8 @@ test("[Create] UserModel", done => {
         done()
     })
 })
+*/
 
-/*
 test("[Create] CommentModel", done => {
     const { poster, post } = { poster: "test1337", post: "Dette er en test" }
     CommentModel.create({
@@ -44,7 +44,7 @@ test("[Create] CommentModel", done => {
         done()
     })
 })
-*/
+
 test("[Create] CategoryModel", done => {
     const { name } = { name: "test" }
     CategoryModel.create({
