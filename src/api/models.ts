@@ -39,7 +39,8 @@ const newsSchema = new Schema({
     comments: { type: [commentSchema], default: [] },
     votes: { type: [{ username: String, vote: { type: Number, min: 0, max: 6 }, timestamp: { type: Date, default: Date.now } }], default: [] },
     flags: { type: [{ username: String, timestamp: { type: Date, default: Date.now } }], default: [] },
-    quality: { type: Number, min: 0, max: 6, default: 0 }
+    quality: { type: Number, min: 0, max: 6, default: 0 },
+    hide: Boolean
 })
 
 

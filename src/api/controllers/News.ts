@@ -17,7 +17,7 @@ import { signToken } from '../crypto'
 export default class News {
     // CRUD OPERATIONS FOR NEWS TO BE USED IN ROUTES
     static post(req: Request, res: Response) {
-        const { header, content, peek, image, category } = req.body
+        const { header, content, peek, image, category, hide } = req.body
         const { username } = req.body.verified
         let temp = {
             poster: username,
@@ -25,7 +25,8 @@ export default class News {
             content,
             peek,
             image,
-            category
+            category,
+            hide
         }
         NewsModel.create(temp)
         .then(respondWithDataAndEmit<Document>(res)(PublicNews.responseFromNewsDoc, signToken(username)))
@@ -33,7 +34,7 @@ export default class News {
     }
 
     static get(_: Request, res: Response) {
-        NewsModel.find()
+        NewsModel.find({ hide: false }).sort('-quality')
             .then(doc => {
                 if(doc) respondWithData<Document[]>(res)(PublicNews.responseFromNewsDocArray)(doc)
                 else respondWithError(res)(StatusCodes.NOT_FOUND, "No posts")()
@@ -67,11 +68,11 @@ export default class News {
     }
 
     static updateFromUsernameTimestamp(req: Request, res: Response) {
-        const { category, image, header, peek, content } = req.body
+        const { category, image, header, peek, content, hide } = req.body
         const { username, timestamp } = req.params
         NewsModel.findOneAndUpdate(
             { poster: username, timestamp: timestamp }, 
-            { $set: { category, image, header, peek, content }},
+            { $set: { category, image, header, peek, content, hide }},
             (err, doc) => {
                 if (err) respondWithError(res)(StatusCodes.SERVER_ERROR, "Could not update post")()
                 else if (doc) respondWithData<Document>(res)(PublicNews.responseFromNewsDoc)(doc)

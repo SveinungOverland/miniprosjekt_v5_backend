@@ -56,13 +56,14 @@ export interface News {
     category: string,
     comments: Comment[],
     voteCount: number,
-    quality: number
+    quality: number,
+    hide: boolean
 }
 
 export class PublicNews {
 
     static responseFromNewsDoc = (news: Document): NewsResponse => {
-        const { poster, header, content, peek, timestamp, image, category, comments, voteCount, quality } = news.toObject()
+        const { poster, header, content, peek, timestamp, image, category, comments, voteCount, quality, hide } = news.toObject()
         return new NewsResponse({
             poster: poster,
             header: header,
@@ -73,13 +74,14 @@ export class PublicNews {
             category: category,
             comments: comments,
             voteCount: voteCount,
-            quality: quality
+            quality: quality,
+            hide: hide
         })
     }
 
     static responseFromNewsDocArray = (newsArray: Document[]): NewsArrayResponse => {
         return new NewsArrayResponse(newsArray.map(doc => {
-            const { _id, poster, header, content, peek, timestamp, image, category, comments, voteCount, quality } = doc.toObject()
+            const { _id, poster, header, content, peek, timestamp, image, category, comments, voteCount, quality, hide } = doc.toObject()
             return {
                 _id: _id,
                 poster: poster,
@@ -91,7 +93,8 @@ export class PublicNews {
                 category: category,
                 comments: comments,
                 voteCount: voteCount,
-                quality: quality
+                quality: quality,
+                hide: hide
             }
         }))
     }
