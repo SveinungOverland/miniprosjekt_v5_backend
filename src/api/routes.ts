@@ -12,6 +12,9 @@ import { UserRoles } from './models';
 const routes = Router()
 
 
+routes.route("/")
+    .get((_, res) => res.json({ msg: "Hello world" }))
+
 routes.route("/user")
     .post(User.post)
     
