@@ -1,4 +1,4 @@
-import { User, Comment, News } from './models.public'
+import { User, Comment, News, Category } from './models.public'
 
 export enum StatusCodes {
     OK = 200,
@@ -51,3 +51,5 @@ export class CommentResponse extends DataResponse<Comment> { }
 export class NewsResponse extends DataResponse<News> { }
 
 export class NewsArrayResponse extends DataResponse<News[]> { }
+
+export class CategoryArrayResponse extends DataResponse<Category[]> { }

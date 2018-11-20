@@ -83,3 +83,17 @@ test("[Delete] NewsModel", done => {
         done()
     })
 })
+
+test("[Delete] CategoryModel", done => {
+    CategoryModel.deleteMany({ name: "test" }).exec()
+    .then(_ => {
+        done()
+    })
+})
+
+test("[Delete] CommentModel", done => {
+    CommentModel.deleteMany({ poster: "test1337" }).exec()
+    .then(_ => {
+        done()
+    })
+})

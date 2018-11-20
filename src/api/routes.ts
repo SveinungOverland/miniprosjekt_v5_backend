@@ -4,6 +4,7 @@ import User from './controllers/User'
 import Token from './controllers/Token'
 import News from './controllers/News'
 import Comment from './controllers/Comment'
+import Category from './controllers/Category'
 
 import { requireLogin, matchParams, matchBody } from './crypto'
 import { UserRoles } from './models';
@@ -36,10 +37,20 @@ routes.route("/news/:username")
 
 routes.route("/news/:username/:timestamp")
     .get(News.getFromUsernameTimestamp)
+    .put(requireLogin(matchParams(params => params.username)(News.updateFromUsernameTimestamp))) //Update path
+    .delete(requireLogin(matchParams(params => params.username)(News.delete)))
 
 
 
 routes.route("/comment/:newsid")
     .post(requireLogin(Comment.postToArticle))
+
+
+routes.route("/category")
+    .post(Category.post)
+    .get(Category.get)
+
+routes.route("/category/:categoryName")
+    .get(Category.getFromName) // Returns news assigned with categoryName
 
 export default routes

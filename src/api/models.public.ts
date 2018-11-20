@@ -1,6 +1,6 @@
 import { Document } from 'mongoose'
 
-import { UserResponse, CommentResponse, NewsResponse, NewsArrayResponse } from './response.interfaces'
+import { UserResponse, CommentResponse, NewsResponse, NewsArrayResponse, CategoryArrayResponse } from './response.interfaces'
 
 
 export interface User {
@@ -95,4 +95,17 @@ export class PublicNews {
             }
         }))
     }
+}
+
+
+export interface Category {
+    name: string
+}
+
+export class PublicCategory {
+    static responseFromCategoryDocArray = (categoryArray: Document[]): CategoryArrayResponse =>
+        new CategoryArrayResponse(categoryArray.map(doc => {
+            const { name } = doc.toObject()
+            return { name }
+        }))
 }
